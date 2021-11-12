@@ -1,51 +1,66 @@
-const name = "Владилен";
-const age = 26;
+// 1. Функции
+// Function Declaration
+// function greet(name) {
+//   console.log('Привет ', name)
+// }
 
-function getAge() {
-  return age;
+// Function Expression
+// const greet2 = function greet2(name) {
+//   console.log('Привет 2 ', name)
+// }
+
+// greet('Саня')
+// greet2('Саня2')
+
+// console.log(typeof greet)
+// console.dir(greet)
+
+// 2. Анонимные функции
+// let counter = 0
+// const interval = setInterval(function() {
+//   if (counter === 10) {
+//     clearInterval(interval) // clearTimeout
+//   } else {
+//     console.log(++counter)
+//   }
+// }, 100)
+
+// 3. Стрелочные функции
+function greet() {
+  console.log("Привет ");
 }
 
-const output = "Привет, меня зовут " + name + " и мой возраст " + age + " лет.";
-const output2 = `Привет, меня зовут ${name} и мой возраст ${
-  age < 30 ? "A" : "B"
-} лет.`;
-const output3 = `
-  <div>This is div</div>
-  <p>this is o</p>
-`;
+const arrow = (name, age) => {
+  console.log("Привет ", name, age);
+};
 
-console.log(output);
-console.log(output2);
-console.log(output3);
+const arrow2 = (name) => console.log("Привет - ", name);
 
-console.log(name.length);
-console.log(name.toUpperCase());
-console.log(name.toLowerCase());
-console.log(name.charAt(2));
-console.log(name.indexOf("!"));
-console.log(name.toLowerCase().startsWith("влад"));
-console.log(name.startsWith("Влад"));
-console.log(name.endsWith("ен!"));
-console.log(name.repeat(3));
-const string = "     password      ";
-console.log(string.trim());
-console.log(string.trimLeft());
-console.log(string.trimRight());
+const pow2 = (num) => num ** 2;
 
-function logPerson(s, name, age) {
-  if (age < 0) {
-    age = "Еще не родился";
+// 4. Параметры по умолчанию
+const sum = (a = 322, b = 100) => a + b;
+
+console.log(sum(11));
+console.log(sum());
+
+function sumAll(...args) {
+  let result = 0;
+  for (const num of args) {
+    result += num;
   }
-  return `${s[0]}${name}${s[1]}${age}${s[2]}`;
+  return result;
+}
+console.log(sumAll(1, 2, 4, 5, 6));
+
+// 5. Замыкание
+
+function createMember(name) {
+  return function (lastName) {
+    console.log(name + lastName);
+  };
 }
 
-const personName = "Владилен";
-const personName2 = "Максим";
-const personAge = 26;
-const personAge2 = -10;
-
-const output4 = logPerson`Имя: ${personName}, Возраст: ${personAge}!`;
-const output5 = logPerson`Имя: ${personName2}, Возраст: ${personAge2}!`;
-
-console.log(output4);
-console.log(output5);
+const member = createMember("ilya");
+console.log(member);
+console.log(member("shalaev"));
