@@ -1,151 +1,70 @@
-// 1. Перемнные
-var name = "Ilya"; // устаревший вариант
-//const lastName = "Shalaev"; // использовать предпочтительно
-let age = 23; //number
-console.log(name);
+//Number
+const num = 322; // integer
+const float = 322.322; // float
+const pow = 10e3;
+console.log(pow);
 
-name = "Vlad"; //string
+console.log("MAX_SAFE_INTEGER", Number.MAX_SAFE_INTEGER);
+console.log("Math.pow 53", Math.pow(2, 53) - 1);
+console.log("MIN_SAFE_INTEGER", Number.MIN_SAFE_INTEGER);
 
-console.log(name);
+console.log("MAX_VALUE", Number.MAX_VALUE);
+console.log("MIN_VALUE", Number.MIN_VALUE);
+console.log("POSITIVE_INFINITY", Number.POSITIVE_INFINITY);
+console.log("NEGATIVE_INFINITY", Number.NEGATIVE_INFINITY);
+console.log("Infinity", Infinity);
+console.log("-Infinity", -Infinity);
+console.log("1/0", 1 / 0);
+console.log("1/-0", 1 / -0);
+console.log(Number.NaN);
+console.log(typeof Number.NaN);
+console.log(isNaN(2 / undefined));
+console.log(isNaN(322));
+console.log(Number.isFinite(Infinity));
+console.log(Number.isFinite(322));
 
-const isProgrammer = true; //boolean
+const stringInt = "322";
+const stringFloat = "322.322";
+console.log(Number.parseInt(stringInt) + 2);
+console.log(parseInt(stringInt) + 2);
+console.log(parseInt(stringInt) + 2);
+console.log(Number(stringInt) + 2);
+console.log(+stringInt + 2);
+console.log(parseFloat(stringFloat) + 2);
+console.log(+stringFloat + 2);
 
-const _private = "private"; //валидно
-const $ = "$"; //валидно
+console.log(0.8 + 0.4);
+console.log(+(0.4 + 0.2).toFixed(1));
+console.log(parseFloat((0.4 + 0.2).toFixed(1)));
 
-const withNum5 = "5"; //валидно
+//2. BigInt
+console.log(90071992547409919999999n - 9007199254740991999999n);
+console.log(-90071992547409919999999n);
+//console.log(90071992547409919999999.23231n) // error
 
-// 2. Мутирование.
-console.log("Имя человека: " + name + ". Возраст: " + age + ".");
+//console.log(10n - 4); // error
+//console.log(parseInt(10n) - 4);
+console.log(10n - BigInt(4));
+console.log(5n / 2n); // 2n
 
-//const lastName = prompt("Напиши фамилию");
-//alert(name + " " + lastName);
+//3. Math
+console.log(Math.E);
+console.log(Math.PI);
 
-// 3. Операторы
-let currentYear = 2021;
-const birstYear = 1998;
+console.log(Math.sqrt(25));
+console.log(Math.pow(5, 3));
+console.log(Math.abs(-42));
+console.log(Math.max(42, 12, 23, 11, 422));
+console.log(Math.min(42, 12, 23, 11, 422));
+console.log(Math.floor(4.9));
+console.log(Math.ceil(4.9));
+console.log(Math.round(4.4));
+console.log(Math.trunc(4.9));
+console.log(Math.random());
 
-const age2 = currentYear - birstYear;
-console.log(age2);
-
-const a = 10;
-const b = 5;
-
-let c = 32;
-c = c + a;
-c = c - a;
-c = c * a;
-c = c / a;
-c += a;
-c -= a;
-c *= a;
-c /= a;
-
-console.log(a + b);
-console.log(a - b);
-console.log(a * b);
-console.log(a / b);
-console.log(++currentYear);
-console.log(--currentYear);
-console.log(c);
-
-// 4. Типы данных.
-const isProg = true;
-const firstName = "Ilya";
-const age3 = 26;
-let x;
-console.log(typeof isProg);
-console.log(typeof firstName);
-console.log(typeof age3);
-console.log(x);
-console.log(typeof x);
-console.log(typeof null);
-console.log(typeof true);
-
-// 5. Приоретет операторов
-const fullAge = 26;
-
-// > < >= <= == === != !===
-const isFullAge = currentYear - birstYear >= fullAge;
-console.log(isFullAge);
-
-// 6. Условные операторы
-const courseStatus = "pending"; //ready, fail, pending
-
-if (courseStatus === "ready") {
-  console.log("Курс уже готов");
-} else if (courseStatus === "pending") {
-  console.log("Курс еще в разработке");
-} else {
-  console.log("Курс зафейлил");
+//4. Example
+function getRandomBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const num1 = 42; //number
-const num2 = "42"; //str
-
-console.log(num1 == num2); // здесь происходит неявное приведение типов
-
-console.log(num1 === num2);
-
-const isReady = true;
-
-if (isReady) console.log("Готово");
-
-isReady ? console.log("Готово") : console.log("Не готово"); // тернарный оператор
-
-// 7. Булеваяа логика
-
-// 8. Функции
-function calculateAge(year) {
-  return 2021 - year;
-}
-
-function logInfoAbout(name, year) {
-  const age = calculateAge(year);
-
-  if (age > 0) {
-    console.log("Имя: " + name + " Возраст: " + age);
-  } else {
-    console.log("Так то это уже будущее");
-  }
-}
-
-console.log(calculateAge(1998));
-logInfoAbout("Вася", 2005);
-logInfoAbout("Вася", 20055);
-
-// 9. Массивы
-const cars = ["Mazda", "Mersedes", "Ford"];
-console.log(cars);
-console.log(cars[1]);
-console.log(cars.length);
-
-cars[0] = "Porsche";
-console.log(cars);
-
-// 10. Циклы
-
-for (let index = 0; index < cars.length; index++) {
-  console.log(cars[index]);
-}
-
-for (const car of cars) {
-  console.log(car);
-}
-
-// 11. Объекты
-const person = {
-  firstName: "Ilya",
-  lastName: "Shalaev",
-  age: 23,
-  lang: ["ru", "en"],
-  greet: function () {
-    console.log("greet");
-  },
-};
-
-console.log(person.firstName);
-console.log(person["lastName"]);
-person.greet();
-person.hasWife = true;
-console.log(person);
+console.log(getRandomBetween(10, 42));
