@@ -1,66 +1,70 @@
-// 1. Функции
-// Function Declaration
-// function greet(name) {
-//   console.log('Привет ', name)
-// }
+const cars = ["Мазда", "Форд", "БМВ", "Мерседс"];
+const fib = [1, 1, 2, 3, 5, 8, 13];
+const people = [
+  { name: "Vladilen", budget: 4200 },
+  { name: "Elena", budget: 3500 },
+  { name: "Victoria", budget: 1700 },
+];
 
-// Function Expression
-// const greet2 = function greet2(name) {
-//   console.log('Привет 2 ', name)
-// }
+// Методы
+cars.push("Рено");
+cars.unshift("Волга");
+console.log(cars);
+const firstCar = cars.shift();
+const lastCar = cars.pop();
+console.log(firstCar);
+console.log(lastCar);
+console.log(cars);
 
-// greet('Саня')
-// greet2('Саня2')
+console.log(cars.reverse());
+console.log(cars);
 
-// console.log(typeof greet)
-// console.dir(greet)
+const index = cars.indexOf("БМВ");
+cars[index] = "Лада";
+console.log(cars);
 
-// 2. Анонимные функции
-// let counter = 0
-// const interval = setInterval(function() {
-//   if (counter === 10) {
-//     clearInterval(interval) // clearTimeout
-//   } else {
-//     console.log(++counter)
-//   }
-// }, 100)
-
-// 3. Стрелочные функции
-function greet() {
-  console.log("Привет ");
-}
-
-const arrow = (name, age) => {
-  console.log("Привет ", name, age);
-};
-
-const arrow2 = (name) => console.log("Привет - ", name);
-
-const pow2 = (num) => num ** 2;
-
-// 4. Параметры по умолчанию
-const sum = (a = 322, b = 100) => a + b;
-
-console.log(sum(11));
-console.log(sum());
-
-function sumAll(...args) {
-  let result = 0;
-  for (const num of args) {
-    result += num;
+let findedPerson;
+for (const person of people) {
+  if (person.budget === 3500) {
+    findedPerson = person;
   }
-  return result;
-}
-console.log(sumAll(1, 2, 4, 5, 6));
-
-// 5. Замыкание
-
-function createMember(name) {
-  return function (lastName) {
-    console.log(name + lastName);
-  };
 }
 
-const member = createMember("ilya");
-console.log(member);
-console.log(member("shalaev"));
+console.log(findedPerson);
+
+const i = people.findIndex(function (person) {
+  return person.budget === 3500;
+});
+
+const person2 = people.find(function (person) {
+  return person.budget === 3500;
+});
+
+console.log(person2);
+const person3 = people.find((person) => person.budget === 3500);
+console.log(person3);
+
+console.log(cars.includes("Мазда!"));
+
+const upperCaseCars = cars.map((car) => {
+  return car.toUpperCase();
+});
+const pow2 = (num) => num ** 2;
+const sqrt = (num) => Math.sqrt(num);
+const pow2Fib = fib.map(pow2).map(Math.sqrt);
+console.log(pow2Fib);
+const filteredNumbers = pow2Fib.filter((num) => num < 10);
+console.log(filteredNumbers);
+
+const text = "Привет, мы изучаем JavaScript";
+const reverseText = text.split("").reverse().join("");
+console.log(reverseText);
+
+const allBudget = people
+  .filter((person) => person.budget > 2000)
+  .reduce((acc, person) => {
+    acc += person.budget;
+    return acc;
+  }, 0);
+
+console.log(allBudget);
