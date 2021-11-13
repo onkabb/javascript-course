@@ -1,70 +1,91 @@
-const cars = ["Мазда", "Форд", "БМВ", "Мерседс"];
-const fib = [1, 1, 2, 3, 5, 8, 13];
-const people = [
-  { name: "Vladilen", budget: 4200 },
-  { name: "Elena", budget: 3500 },
-  { name: "Victoria", budget: 1700 },
-];
+const person = {
+  name: "Ilya",
+  age: 26,
+  isProg: true,
+  languages: ["ru", "en"],
+  "complex key": "Value",
+  ["key _" + (1 + 5)]: "Computed",
+  greet() {
+    console.log("greet from person");
+  },
+  info() {
+    console.log(this);
+    console.info("Информация про человека по имени:", this.name);
+  },
+};
 
-// Методы
-cars.push("Рено");
-cars.unshift("Волга");
-console.log(cars);
-const firstCar = cars.shift();
-const lastCar = cars.pop();
-console.log(firstCar);
-console.log(lastCar);
-console.log(cars);
+console.log(person.name);
+const ageKey = "age";
+console.log(person[ageKey]);
+console.log(person["complex key"]);
+person.greet();
 
-console.log(cars.reverse());
-console.log(cars);
+person.age++;
+person.languages.push("kz");
 
-const index = cars.indexOf("БМВ");
-cars[index] = "Лада";
-console.log(cars);
+// person['key_4'] = undefined;
+delete person["key_4"];
 
-let findedPerson;
-for (const person of people) {
-  if (person.budget === 3500) {
-    findedPerson = person;
+console.log(person["key_4"]);
+
+// const name = person.name;
+// const age = person.age;
+// const languages = person.languages;
+
+const { name, age: personAge = 10, languages } = person;
+console.log(name, personAge, languages);
+
+for (const key in person) {
+  if (Object.hasOwnProperty.call(person, key)) {
+    const element = person[key];
+    console.log(element);
   }
 }
 
-console.log(findedPerson);
-
-const i = people.findIndex(function (person) {
-  return person.budget === 3500;
+const keys = Object.keys(person);
+keys.forEach((key) => {
+  console.log("key:", key);
+  console.log("value:", person[key]);
 });
 
-const person2 = people.find(function (person) {
-  return person.budget === 3500;
-});
+// Context
+person.info();
 
-console.log(person2);
-const person3 = people.find((person) => person.budget === 3500);
-console.log(person3);
+const logger = {
+  keys() {
+    console.log(Object.keys(this));
+  },
+  keysAndValues() {
+    // Object.keys(this).forEach((key) => {
+    //   console.log(`"${key}": ${this[key]}`);
+    // });
+    for (const key in this) {
+      if (Object.hasOwnProperty.call(this, key)) {
+        console.log("Key: " + key);
+        console.log("Value: " + this[key]);
+      }
+    }
+  },
+  withParams(top = false, between = false, bottom = false) {
+    if (top) {
+      console.log("- Start -");
+    }
+    Object.keys(this).forEach((key, index, array) => {
+      console.log(`"${key}": ${this[key]}`);
+      if (between && index !== array.length - 1) {
+        console.log("---------");
+      }
+    });
 
-console.log(cars.includes("Мазда!"));
+    if (bottom) {
+      console.log("- End -");
+    }
+  },
+};
 
-const upperCaseCars = cars.map((car) => {
-  return car.toUpperCase();
-});
-const pow2 = (num) => num ** 2;
-const sqrt = (num) => Math.sqrt(num);
-const pow2Fib = fib.map(pow2).map(Math.sqrt);
-console.log(pow2Fib);
-const filteredNumbers = pow2Fib.filter((num) => num < 10);
-console.log(filteredNumbers);
+const bound = logger.keys.bind(person);
+bound();
 
-const text = "Привет, мы изучаем JavaScript";
-const reverseText = text.split("").reverse().join("");
-console.log(reverseText);
-
-const allBudget = people
-  .filter((person) => person.budget > 2000)
-  .reduce((acc, person) => {
-    acc += person.budget;
-    return acc;
-  }, 0);
-
-console.log(allBudget);
+console.clear();
+logger.keysAndValues.call(person);
+logger.withParams.call(person, true, true, true);
